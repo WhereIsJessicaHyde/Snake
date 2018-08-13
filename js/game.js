@@ -16,12 +16,6 @@ function Game(options) {
       );
     }
   }
-}
-
-var game = new Game({
-  rows: 50,
-  columns: 50,
-  snake: new Snake()
 
 // vamos a crear this.drawSnake(), para llamar a la funcion
 // dentro del constructor
@@ -35,74 +29,6 @@ this.drawFood();
  this.assignControlsToKeys();
 
 
-});
-
-// funcion que dibuja la serpiente
-Game.prototype.drawSnake = function() {
-  this.snake.body.forEach( function(position, index) {
-    var selector = '[data-row=' + position.row + '][data-col=' + position.column + ']';
-    $(selector).addClass('snake');
-  });
-};
-
-// generamos un alimento en una posicion aleatoria vacia
-
-Game.prototype.generateFood = function() {
-  do {
-    this.food = {
-      row: Math.floor(Math.random() * this.rows),
-      column: Math.floor(Math.random() * this.columns)
-    };
-  } while (this.snake.collidesWith(this.food));
-};
-
-// mostrar comida
-
-Game.prototype.drawFood = function(){
-  var selector = '[data-row=' + this.food.row + '][data-col=' + this.food.column + ']';
-  $(selector).addClass('food');
-};
-
-//vamos a generar una funcion para comenzar el juego
-Game.prototype.start = function(){
-  //le vamos a añadir if(!this.intervalID){this.intervalId = ...} para la funcion
-  //stop
-  if(!this.intervalId) {
-    this.intervalId = setInterval(this.update.bind(this), 100);
-  }
-
-};
-
-Game.prototype.update = function(){
-  this.snake.moveForward(this.rows, this.columns);
-  //funciones que controlan el comportamiento de la comida
-  if (this.snake.hasEatenFood(this.food)){
-    this.snake.grow();
-    this.clearFood();
-    this.generateFood();
-    this.drawFood();
-  }
-  //funcion que controla el final del juego
-  if (this.snake.hasEatenItself()){
-  alert('Game Over');
-  this.stop();
-}
-  //aqui vamos a meter una funcion que elimine una serpiente dibujada existente
-  //para poder pintar una nueva
-  this.clearSnake();
-  //pintamos la serpiente
-  this.drawSnake();
-};
-
-//Necesitamos declarar una función para borrar la serpiente actual antes de
-//dibujar la nueva.
-Game.prototype.clearSnake = function() {
-  $('.snake').removeClass('snake');
-};
-
-Game.prototype.update = function(){
-  this.snake.moveForward(this.rows, this.columns);
-  this.drawSnake();
 };
 
 //Funcion que controla el movimiento de la serpiente con las teclas de direcciones
@@ -133,11 +59,52 @@ Game.prototype.assignControlsToKeys = function(){
     }
   }.bind(this));
 }
+// generamos un alimento en una posicion aleatoria vacia
+
+Game.prototype.generateFood = function() {
+  do {
+    this.food = {
+      row: Math.floor(Math.random() * this.rows),
+      column: Math.floor(Math.random() * this.columns)
+    };
+  } while (this.snake.collidesWith(this.food));
+};
+
+// funcion que dibuja la serpiente
+Game.prototype.drawSnake = function() {
+  this.snake.body.forEach( function(position, index) {
+    var selector = '[data-row=' + position.row + '][data-col=' + position.column + ']';
+    $(selector).addClass('snake');
+  });
+};
+
+//Necesitamos declarar una función para borrar la serpiente actual antes de
+//dibujar la nueva.
+Game.prototype.clearSnake = function() {
+  $('.snake').removeClass('snake');
+};
+
+// mostrar comida
+
+Game.prototype.drawFood = function(){
+  var selector = '[data-row=' + this.food.row + '][data-col=' + this.food.column + ']';
+  $(selector).addClass('food');
+};
 
 //funcion que elimina la comida existente
 Game.prototype.clearFood = function(){
   $(".food").removeClass('food');
   this.food = undefined;
+};
+
+//vamos a generar una funcion para comenzar el juego
+Game.prototype.start = function(){
+  //le vamos a añadir if(!this.intervalID){this.intervalId = ...} para la funcion
+  //stop
+  if(!this.intervalId) {
+    this.intervalId = setInterval(this.update.bind(this), 100);
+  }
+
 };
 
 //funcion stop
@@ -146,4 +113,25 @@ Game.prototype.stop = function(){
     clearInterval(this.intervalId);
     this.intervalId = undefined;
   }
+};
+
+Game.prototype.update = function(){
+  this.snake.moveForward(this.rows, this.columns);
+  //funciones que controlan el comportamiento de la comida
+  if (this.snake.hasEatenFood(this.food)){
+    this.snake.grow();
+    this.clearFood();
+    this.generateFood();
+    this.drawFood();
+  }
+  //funcion que controla el final del juego
+  if (this.snake.hasEatenItself()){
+  alert('Game Over');
+  this.stop();
+}
+  //aqui vamos a meter una funcion que elimine una serpiente dibujada existente
+  //para poder pintar una nueva
+  this.clearSnake();
+  //pintamos la serpiente
+  this.drawSnake();
 };
