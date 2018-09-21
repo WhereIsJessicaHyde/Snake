@@ -74,26 +74,26 @@ Game.prototype.generateFood = function() {
 Game.prototype.drawSnake = function() {
   this.snake.body.forEach( function(position, index) {
     var selector = '[data-row=' + position.row + '][data-col=' + position.column + ']';
-    $(selector).addClass('snake');
+    $(selector).addClass('board__snake');
   });
 };
 
 //Necesitamos declarar una función para borrar la serpiente actual antes de
 //dibujar la nueva.
 Game.prototype.clearSnake = function() {
-  $('.snake').removeClass('snake');
+  $('.board__snake').removeClass('board__snake');
 };
 
 // mostrar comida
 
 Game.prototype.drawFood = function(){
   var selector = '[data-row=' + this.food.row + '][data-col=' + this.food.column + ']';
-  $(selector).addClass('food');
+  $(selector).addClass('board__food');
 };
 
 //funcion que elimina la comida existente
 Game.prototype.clearFood = function(){
-  $(".food").removeClass('food');
+  $(".board__food").removeClass('board__food');
   this.food = undefined;
 };
 
