@@ -1,4 +1,6 @@
 @import 'partials/vars'
+@import 'partials/button'
+@import 'partials/board'
 
 *
   padding: 0
@@ -14,28 +16,3 @@ h1
   font:
     size: 100px
   text-align: center
-
-.container
-  height: 800px
-  margin: 30px auto
-  width: 800px
-  border: solid 10px black
-    radius: 10px 10px 0 0
-  box-shadow: 0 5px 10px gray
-
-
-.cell
-  background-size: contain
-  box-sizing: border-box
-  float: left
-  height: 16px
-  width: 16px
-
-.board
-  background-color: $primary-gray
-
-  &__snake
-    background-color: $terciary-green
-
-  &__food
-    background-color: $background-red

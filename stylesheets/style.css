@@ -1,3 +1,44 @@
+footer {
+  margin: 0 auto;
+  width: 500px;
+  padding: 20px 50px;
+  border: solid 10px #000;
+    border-radius: 0 0 10px 10px;
+    border-top: none;
+  box-shadow: 0 5px 10px #999;
+  background-color: rgba(215, 44, 44, 0.8); }
+
+.start {
+  background-color: #fff;
+  color: rgba(215, 44, 44, 0.8);
+  border: none;
+    border-radius: 4px;
+  padding: 12px 18px;
+  display: block;
+  margin: 0 auto; }
+
+.container {
+  height: 600px;
+  margin: 30px auto 0 auto;
+  width: 600px;
+  border: solid 10px black;
+    border-radius: 10px 10px 0 0;
+  box-shadow: 0 5px 10px gray; }
+
+.cell {
+  background-size: contain;
+  box-sizing: border-box;
+  float: left;
+  height: 12px;
+  width: 12px; }
+
+.board {
+  background-color: #999; }
+  .board__snake {
+    background-color: #407847; }
+  .board__food {
+    background-color: rgba(215, 44, 44, 0.8); }
+
 * {
   padding: 0;
   margin: 0;
@@ -10,25 +51,3 @@ h1 {
   padding: 0;
   font-size: 100px;
   text-align: center; }
-
-.container {
-  height: 800px;
-  margin: 30px auto;
-  width: 800px;
-  border: solid 10px black;
-    border-radius: 10px 10px 0 0;
-  box-shadow: 0 5px 10px gray; }
-
-.cell {
-  background-size: contain;
-  box-sizing: border-box;
-  float: left;
-  height: 16px;
-  width: 16px; }
-
-.board {
-  background-color: #999; }
-  .board__snake {
-    background-color: #407847; }
-  .board__food {
-    background-color: rgba(215, 44, 44, 0.8); }
